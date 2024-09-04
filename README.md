@@ -76,12 +76,12 @@ Before using POK-manager.sh, ensure that you have the following prerequisites in
 4. Download and set up POK-manager.sh:
    - Option 1: Run the following command to download and set up POK-manager.sh in a single step:
      ```bash
-     git clone https://github.com/Acekorneya/Ark-Survival-Ascended-Server.git && sudo chown -R 1000:1000 Ark-Survival-Ascended-Server && sudo mv Ark-Survival-Ascended-Server/POK-manager.sh . && sudo chmod +x POK-manager.sh && sudo mv Ark-Survival-Ascended-Server/defaults . && sudo rm -rf Ark-Survival-Ascended-Server
+     git clone https://github.com/thmhoag/Ark-Survival-Ascended-Server.git && sudo chown -R 1000:1000 Ark-Survival-Ascended-Server && sudo mv Ark-Survival-Ascended-Server/POK-manager.sh . && sudo chmod +x POK-manager.sh && sudo mv Ark-Survival-Ascended-Server/defaults . && sudo rm -rf Ark-Survival-Ascended-Server
      ```
 
    - Option 2: Follow these step-by-step commands:
      ```bash
-     git clone https://github.com/Acekorneya/Ark-Survival-Ascended-Server.git
+     git clone https://github.com/thmhoag/Ark-Survival-Ascended-Server.git
      sudo chown -R 1000:1000 Ark-Survival-Ascended-Server
      sudo mv Ark-Survival-Ascended-Server/POK-manager.sh .
      sudo chmod +x POK-manager.sh
@@ -291,7 +291,7 @@ version: '2.4'
 services:
   asaserver:
     build: .
-    image: acekorneya/asa_server:2_0_latest
+    image: thmhoag/asa_server_pok:latest
     container_name: asa_my_instance
     restart: unless-stopped
     environment:
@@ -364,9 +364,9 @@ In that case just change your CPU type to host in the hardware settings of your 
 - [Docker Installation](https://docs.docker.com/engine/install/)
 - [Docker Compose Installation](https://docs.docker.com/compose/install/)
 - [Git Downloads](https://git-scm.com/downloads)
-- [Ark Survival Ascended Server Docker Image](https://hub.docker.com/r/acekorneya/asa_server)
+- [Ark Survival Ascended Server Docker Image](https://hub.docker.com/r/thmhoag/asa_server_pok)
 - [Server Configuration](https://ark.wiki.gg/wiki/Server_configuration)
-- [POK-manager.sh GitHub Repository](https://github.com/Acekorneya/Ark-Survival-Ascended-Server)
+- [POK-manager.sh GitHub Repository](https://github.com/thmhoag/Ark-Survival-Ascended-Server)
 
 ## Support
 
@@ -393,25 +393,3 @@ We Also have Ark Servers for people who dont have the requirements to host a ful
 
 Make sure to select "SHOW PLAYER SERVER" To be able to find it in unofficials Servers 
 
-## Support the Project
-
-If you find POK-manager.sh useful and would like to support its development, you can buy me a coffee! Your support is greatly appreciated and helps me continue maintaining and improving the project.
-
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/acekorneyab)
-
-Your contributions will go towards:
-- Implementing new features and enhancements
-Thank you for your support!
-
----
-
-
-## Star History
-
-<a href="https://star-history.com/#Acekorneya/Ark-Survival-Ascended-Server&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Acekorneya/Ark-Survival-Ascended-Server&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Acekorneya/Ark-Survival-Ascended-Server&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Acekorneya/Ark-Survival-Ascended-Server&type=Date" />
-  </picture>
-</a>

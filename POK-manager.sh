@@ -576,12 +576,13 @@ root_tasks() {
   adjust_ownership_and_permissions "${base_dir}/ServerFiles/arkserver"
   adjust_ownership_and_permissions "${base_dir}/ServerFiles/arkserver/ShooterGame"
   adjust_ownership_and_permissions "${base_dir}/Cluster"
-  prompt_change_host_timezone  
+  ## Let me monitor my own timezone
+  # prompt_change_host_timezone
   echo "Root tasks completed. You're now ready to create an instance."
 }
 
 pull_docker_image() {
-  local image_name="acekorneya/asa_server:2_0_latest"
+  local image_name="thmhoag/asa_server_pok:latest"
   echo "Pulling Docker image: $image_name"
   sudo docker pull "$image_name"
 }
@@ -664,7 +665,7 @@ version: '2.4'
 services:
   asaserver:
     build: .
-    image: acekorneya/asa_server:2_0_latest
+    image: thmhoag/asa_server_pok:latest
     container_name: asa_${instance_name} 
     restart: unless-stopped
     environment:
@@ -996,7 +997,7 @@ start_instance() {
   if [ -f "$docker_compose_file" ]; then
     get_docker_compose_cmd
     echo "Using $DOCKER_COMPOSE_CMD for ${instance_name}..."
-    docker pull acekorneya/asa_server:2_0_latest
+    docker pull thmhoag/asa_server_pok:latest
     $DOCKER_COMPOSE_CMD -f "$docker_compose_file" up -d
     local use_sudo
     local config_file=$(get_config_file_path)
@@ -1008,22 +1009,22 @@ start_instance() {
     
     if [ "$use_sudo" = "true" ]; then
       echo "Using 'sudo' for Docker commands..."
-      sudo docker pull acekorneya/asa_server:2_0_latest
+      sudo docker pull thmhoag/asa_server_pok:latest
       check_vm_max_map_count
       sudo $DOCKER_COMPOSE_CMD -f "$docker_compose_file" up -d
     else
-      docker pull acekorneya/asa_server:2_0_latest || {
+      docker pull thmhoag/asa_server_pok:latest || {
         local pull_exit_code=$?
-        if [ $pull_exit_code -eq 1 ] && [[ $(docker pull acekorneya/asa_server:2_0_latest 2>&1) =~ "permission denied" ]]; then
+        if [ $pull_exit_code -eq 1 ] && [[ $(docker pull thmhoag/asa_server_pok:latest 2>&1) =~ "permission denied" ]]; then
           echo "Permission denied error occurred while pulling the Docker image."
           echo "It seems the user is not set up correctly to run Docker commands without 'sudo'."
           echo "Falling back to using 'sudo' for Docker commands."
-          sudo docker pull acekorneya/asa_server:2_0_latest
+          sudo docker pull thmhoag/asa_server_pok:latest
           check_vm_max_map_count
           sudo $DOCKER_COMPOSE_CMD -f "$docker_compose_file" up -d
         else
           echo "An error occurred while pulling the Docker image:"
-          echo "$(docker pull acekorneya/asa_server:2_0_latest 2>&1)"
+          echo "$(docker pull thmhoag/asa_server_pok:latest 2>&1)"
           exit 1
         fi
       }
@@ -1398,7 +1399,7 @@ get_build_id_from_acf() {
 }
 check_for_POK_updates() {
   echo "Checking for updates to POK-manager.sh..."
-  local script_url="https://raw.githubusercontent.com/Acekorneya/Ark-Survival-Ascended-Server/master/POK-manager.sh"
+  local script_url="https://raw.githubusercontent.com/thmhoag/Ark-Survival-Ascended-Server/master/POK-manager.sh"
   local temp_file="/tmp/POK-manager.sh"
 
   if command -v wget &>/dev/null; then
@@ -1519,7 +1520,7 @@ ensure_steamcmd_executable() {
 # Function to update an instance
 update_manager_and_instances() {
   echo "----- Checking for updates to POK-manager.sh -----"
-  local script_url="https://raw.githubusercontent.com/Acekorneya/Ark-Survival-Ascended-Server/master/POK-manager.sh"
+  local script_url="https://raw.githubusercontent.com/thmhoag/Ark-Survival-Ascended-Server/master/POK-manager.sh"
   local temp_file="/tmp/POK-manager.sh"
 
   if command -v wget &>/dev/null; then
