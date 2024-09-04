@@ -1902,7 +1902,8 @@ manage_service() {
   # Adjust Docker permissions only for actions that explicitly require Docker interaction
   case $action in
   -start | -stop | -update | -create | -edit | -restore | -logs | -backup | -restart | -shutdown | -status | -chat | -saveworld)
-    adjust_docker_permissions
+    ## do not adjust docker sock owner/permissions
+    # adjust_docker_permissions
     ;;
   esac
 
