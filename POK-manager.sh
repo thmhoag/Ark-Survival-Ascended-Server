@@ -962,7 +962,7 @@ list_instances() {
 
 find_editor() {
   # List of common text editors, ordered by preference
-  local editors=("nano" "vim" "vi" "emacs")
+  local editors=("vim" "vi" "emacs")
 
   for editor in "${editors[@]}"; do
     if command -v "$editor" &> /dev/null; then
