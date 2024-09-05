@@ -79,6 +79,7 @@ start_server() {
   local battleye_arg=""
   local rcon_args=""
   local custom_args=""
+  local custom_flags=""
   local cluster_id_arg=""
   local server_password_arg=""
   local session_name_arg="SessionName=\"${SESSION_NAME}\""
@@ -112,6 +113,10 @@ start_server() {
     custom_args="$CUSTOM_SERVER_ARGS"
   fi
 
+  if [ -n "$CUSTOM_SERVER_FLAGS" ]; then
+    custom_flags="$CUSTOM_SERVER_FLAGS"
+  fi
+
   if [ -n "$SERVER_PASSWORD" ]; then
     server_password_arg="?ServerPassword=${SERVER_PASSWORD}"
   fi
@@ -133,7 +138,7 @@ start_server() {
   #fi
   
   # Construct the full server start command
-  local server_command="proton run /home/pok/arkserver/ShooterGame/Binaries/Win64/ArkAscendedServer.exe $MAP_PATH?listen?$session_name_arg?${rcon_args}${server_password_arg}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD} -Port=${ASA_PORT} -WinLiveMaxPlayers=${MAX_PLAYERS} $cluster_id_arg -servergamelog -servergamelogincludetribelogs -ServerRCONOutputTribeLogs $custom_args $mods_arg $battleye_arg $passive_mods_arg"
+  local server_command="proton run /home/pok/arkserver/ShooterGame/Binaries/Win64/ArkAscendedServer.exe $MAP_PATH?listen?$session_name_arg?${rcon_args}${server_password_arg}?ServerAdminPassword=${SERVER_ADMIN_PASSWORD}${custom_args} -Port=${ASA_PORT} -WinLiveMaxPlayers=${MAX_PLAYERS} $cluster_id_arg -servergamelog -servergamelogincludetribelogs -ServerRCONOutputTribeLogs $custom_flags $mods_arg $battleye_arg $passive_mods_arg"
 
   # Start the server using Proton-GE
   echo "Starting server with Proton-GE..."
